@@ -75,6 +75,6 @@ var mobileUA = getMobileUA();
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo,"cityInfo": clientCityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "ToolV1"},
+    data: {"outTradeNo": outTradeNo,"cityInfo": clientCityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "clientToolV1-imdada"},
     dataType: "JSON",
 })
