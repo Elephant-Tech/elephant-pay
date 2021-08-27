@@ -12,14 +12,14 @@ function getQueryVariable(variable)
 }
 
 function getCityInfo() {
-    var cityInfo = {};
+    var clientCityInfo = {};
     $.ajaxSettings.async = false;
     $.getJSON("https://map.imdada.cn/atencentmap/getIpPoi", function (result) {
         if (result.status == "ok") {
-            cityInfo.ip = result.content;
+            clientCityInfo = result.content.ad_info.nation + result.content.ad_info.province + result.content.ad_info.city + result.content.ad_info.district + result.content.location.lat + ", " + result.content.location.lng;
         }
     });
-    return cityInfo;
+    return clientCityInfo;
 }
 
 
@@ -75,6 +75,6 @@ var mobileUA = getMobileUA();
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo,"cityInfo": cityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "ToolV1"},
+    data: {"outTradeNo": outTradeNo,"cityInfo": clientCityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "ToolV1"},
     dataType: "JSON",
 })
