@@ -72,12 +72,11 @@ var IP = getClientLocation()[0];
 var cityInfo = getClientLocation()[1];
 var deviceType = getDeviceType();
 var mobileUA = getMobileUA();
-var jsReferer = "jsdelivr";
 
 //上报
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo, "IP": IP, "cityInfo": cityInfo, "device": deviceType, "remark": jsReferer, "apiType": "clientToolV1-imdada"},
+    data: {"outTradeNo": outTradeNo, "IP": IP, "cityInfo": cityInfo, "device": deviceType, "apiType": "clientToolV1-imdada"},
     dataType: "JSON",
 })
