@@ -67,7 +67,7 @@ function getMobileUA() {
 }
 
 var outTradeNo = getQueryVariable("outTradeNo");
-var cityInfo = getCityInfo();
+var cityInfo = clientCityInfo();
 var deviceType = getDeviceType();
 var mobileUA = getMobileUA();
 
@@ -75,6 +75,6 @@ var mobileUA = getMobileUA();
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo,"cityInfo": clientCityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "clientToolV1-imdada"},
+    data: {"outTradeNo": outTradeNo,"cityInfo": cityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "clientToolV1-imdada"},
     dataType: "JSON",
 })
