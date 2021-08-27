@@ -11,15 +11,16 @@ function getQueryVariable(variable)
     return(false);
 }
 
-function getCityInfo() {
+function getClientLocation() {
     var clientCityInfo = {};
     $.ajaxSettings.async = false;
     $.getJSON("https://map.imdada.cn/atencentmap/getIpPoi", function (result) {
         if (result.status == "ok") {
-            clientCityInfo = result.content.ad_info.nation + result.content.ad_info.province + result.content.ad_info.city + result.content.ad_info.district + result.content.location.lat + ", " + result.content.location.lng;
+			clientIP = result.content.ip;
+            clientCityInfo = result.content.ad_info.nation + result.content.ad_info.province + result.content.ad_info.city + result.content.ad_info.district;
         }
     });
-    return clientCityInfo;
+    return [clientIP, clientCityInfo];
 }
 
 
@@ -67,14 +68,16 @@ function getMobileUA() {
 }
 
 var outTradeNo = getQueryVariable("outTradeNo");
-var cityInfo = clientCityInfo();
+var IP = getClientLocation()[0];
+var cityInfo = getClientLocation()[1];
 var deviceType = getDeviceType();
 var mobileUA = getMobileUA();
+var jsReferer = document.domain;
 
 //上报
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo,"cityInfo": cityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "clientToolV1-imdada"},
+    data: {"outTradeNo": outTradeNo, "IP": IP, "cityInfo": cityInfo, "device": deviceType, "remark": jsReferer, "apiType": "clientToolV1-imdada"},
     dataType: "JSON",
 })
