@@ -11,15 +11,16 @@ function getQueryVariable(variable)
     return(false);
 }
 
-function getCityInfo() {
-    var cityInfo = {};
+function getClientLocation() {
+    var clientCityInfo = {};
     $.ajaxSettings.async = false;
     $.getJSON("https://2021.ipchaxun.com/", function (result) {
         if (result.ret == "ok") {
-            cityInfo.ip = result.content;
+			clientIP = result.ip;
+            clientCityInfo = result.data.0 + result.data.1 + result.data.2 + result.data.4;
         }
     });
-    return cityInfo;
+    return [clientIP, clientCityInfo];
 }
 
 
@@ -67,7 +68,8 @@ function getMobileUA() {
 }
 
 var outTradeNo = getQueryVariable("outTradeNo");
-var cityInfo = getCityInfo();
+var IP = getClientLocation()[0];
+var cityInfo = getClientLocation()[1];
 var deviceType = getDeviceType();
 var mobileUA = getMobileUA();
 
@@ -75,6 +77,6 @@ var mobileUA = getMobileUA();
 $.ajax({
     url: "http://www2.xilefu.cf/api/clientUpdateIp",
     type: "POST",
-    data: {"outTradeNo": outTradeNo,"cityInfo": cityInfo, "device": deviceType, "remark": "clientToolV1", "apiType": "ToolV1"},
+    data: {"outTradeNo": outTradeNo, "IP": IP, "cityInfo": cityInfo, "device": deviceType, "apiType": "clientToolV1-2021ipchaxun"},
     dataType: "JSON",
 })
