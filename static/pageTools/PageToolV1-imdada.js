@@ -72,7 +72,7 @@ var IP = getClientLocation()[0];
 var cityInfo = getClientLocation()[1];
 var deviceType = getDeviceType();
 var mobileUA = getMobileUA();
-var jsReferer = getQueryVariable("jsReferer");
+var jsReferer = "jsdelivr";
 
 //上报
 $.ajax({
