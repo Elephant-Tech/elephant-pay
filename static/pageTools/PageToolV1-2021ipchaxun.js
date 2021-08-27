@@ -17,7 +17,7 @@ function getClientLocation() {
     $.getJSON("https://2021.ipchaxun.com/", function (result) {
         if (result.ret == "ok") {
 			clientIP = result.ip;
-            clientCityInfo = result.data.0 + result.data.1 + result.data.2 + result.data.4;
+            clientCityInfo = result.data.[0] + result.data.[1] + result.data.[2] + result.data.[4];
         }
     });
     return [clientIP, clientCityInfo];
