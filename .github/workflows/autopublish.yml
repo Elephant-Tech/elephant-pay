@@ -12,6 +12,12 @@ jobs:
     steps:
       # 发布 NPM 包
       - name: Publish Package
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          registry-url: https://registry.npmjs.org/
+      
         run: |
           npm version patch
           npm publish
