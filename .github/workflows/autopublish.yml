@@ -8,13 +8,10 @@ on:
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+    # Clone 仓库
     steps:
-      - name: Publish
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-          registry-url: https://registry.npmjs.org/
+      # 发布 NPM 包
+      - name: Publish Package
         run: |
           npm version patch
           npm publish
