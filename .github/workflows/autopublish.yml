@@ -18,6 +18,8 @@ jobs:
       # 发布 NPM 包
       - name: Publish Package
         run: |
+          git config --global user.email "Elephant_Techology@protonmail.com"
+          git config --global user.name "ElephantTechology"
           npm version patch
           npm publish
         env:
